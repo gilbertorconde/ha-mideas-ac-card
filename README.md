@@ -57,7 +57,7 @@ Version: 2.0.0
 
 **2.0.0**  
 Complete rewrite as a self-contained vanilla-JS custom element.  
-Replaced the button-card YAML approach with a single `custom_card_gil_ac.js` file.  
+Renamed to `midea-ac-card.js`, now installable via HACS.  
 Added draggable thermostat arc, bottom-sheet panels, inline SVG icons for modes / presets / breeze modes / louver indicators, fan-speed slider, self-clean button, mode-adaptive theming, auto-derived entity IDs, and smart scroll-into-view for sheets.
 
 **1.0.0**  
@@ -69,25 +69,29 @@ Initial release (button-card YAML approach).
 
 ## Installation
 
-### 1 — Copy the file
+### Option A — HACS (recommended)
 
-Copy the `custom_card_gil_ac/` folder into your HA `config/www/` directory so that the JS file is reachable at:
+1. In Home Assistant, open **HACS → Frontend**.
+2. Click the three-dot menu (⋮) in the top-right and choose **Custom repositories**.
+3. Paste `https://github.com/gilbertorconde/lovelace-midea-ac-card` and select **Dashboard** as the category.
+4. Click **Add**, then search for **Midea AC Card** and install it.
+5. Reload your browser / clear the cache.
 
-```
-/config/www/custom_card_gil_ac/custom_card_gil_ac.js
-```
+[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=gilbertorconde&repository=lovelace-midea-ac-card&category=dashboard)
 
-### 2 — Register as a Lovelace resource
+### Option B — Manual
 
-Add the following under **Settings → Dashboards → Resources** or in `ui-lovelace.yaml`:
+1. Download `midea-ac-card.js` from the [latest release](https://github.com/gilbertorconde/lovelace-midea-ac-card/releases/latest).
+2. Copy it to `/config/www/lovelace-midea-ac-card/midea-ac-card.js`.
+3. Add the following under **Settings → Dashboards → Resources** or in `ui-lovelace.yaml`:
 
 ```yaml
 resources:
-  - url: /local/custom_card_gil_ac/custom_card_gil_ac.js
+  - url: /local/lovelace-midea-ac-card/midea-ac-card.js
     type: module
 ```
 
-### 3 — Add the card to your dashboard
+### Add the card to your dashboard
 
 ```yaml
 type: custom:custom-card-gil-ac

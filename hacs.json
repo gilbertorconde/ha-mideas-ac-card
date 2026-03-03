@@ -1,0 +1,6 @@
+{
+  "name": "Midea AC Card",
+  "content_in_root": true,
+  "filename": "midea-ac-card.js",
+  "homeassistant": "2023.4.0"
+}

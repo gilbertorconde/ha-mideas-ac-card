@@ -2,8 +2,10 @@
 // Midea AC Control Card  v2.0.0
 // Inspired by the official Midea app UI.
 //
-// Place this file in:  /config/www/custom_card_gil_ac/custom_card_gil_ac.js
-// Register as a Lovelace resource (type: module).
+// Install via HACS (search "Midea AC Card") or manually:
+//   Place this file in:  /config/www/lovelace-midea-ac-card/midea-ac-card.js
+//   Register as a Lovelace resource (type: module):
+//     url: /local/lovelace-midea-ac-card/midea-ac-card.js
 //
 // Usage:
 //   type: custom:custom-card-gil-ac
