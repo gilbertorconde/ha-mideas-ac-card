@@ -327,7 +327,6 @@ class AcCard extends HTMLElement {
     this._fanTimer  = null;   // debounce timer for fan slider
     this._dragging  = false;  // true while user is dragging the arc
     this._dragTemp  = null;   // live temperature value during drag
-    this._lastMode  = null;   // last non-off hvac_mode — restored on power-on
   }
 
   static getStubConfig() {
@@ -354,12 +353,6 @@ class AcCard extends HTMLElement {
       cfg.swing_h_angle, cfg.swing_v_angle, cfg.rate_select,
       cfg.self_clean_sensor,
     ].filter(Boolean);
-
-    // Remember the last non-off mode so we can restore it on power-on
-    const climateState = hass.states[cfg.entity];
-    if (climateState && climateState.state !== 'off' && climateState.state !== 'unavailable' && climateState.state !== 'unknown') {
-      this._lastMode = climateState.state;
-    }
 
     // Skip re-render if nothing relevant changed, or while user is dragging the arc
     if (this._dragging) return;
@@ -1503,11 +1496,9 @@ input[type=range]:disabled { opacity: .4; cursor: default; }
       // ── Power ────────────────────────────────────────────────────────────
       case 'toggle-power':
         if (climate.state === 'off') {
-          // Restore the last active mode; fall back to 'cool' if never seen one
-          const restoreMode = this._lastMode || 'cool';
-          this._call('climate', 'set_hvac_mode', { entity_id: cid, hvac_mode: restoreMode });
+          this._call('climate', 'turn_on', { entity_id: cid });
         } else {
-          this._call('climate', 'set_hvac_mode', { entity_id: cid, hvac_mode: 'off' });
+          this._call('climate', 'turn_off', { entity_id: cid });
         }
         break;
 
